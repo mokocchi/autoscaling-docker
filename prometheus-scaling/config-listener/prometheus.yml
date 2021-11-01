@@ -1,0 +1,12 @@
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - scaling-alertmanager:9093
+global:
+  evaluation_interval: 15s
+  scrape_interval: 15s
+rule_files:
+- alert.rules.yml
+scrape_configs:
+- job_name: prometheus

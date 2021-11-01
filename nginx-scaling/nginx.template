@@ -1,0 +1,33 @@
+upstream containers {
+    least_conn;
+    #servers-begin
+    server $start_server;
+    #servers-end
+}
+
+server {
+    listen 80;
+    location / {
+        proxy_set_header   X-Real-IP $$remote_addr;
+        proxy_set_header   Host      $$http_host;
+        proxy_pass         http://containers;
+    }
+
+    location /status {
+        vhost_traffic_status_display;
+        vhost_traffic_status_display_format prometheus;
+        
+        #allow scaling-prometheus;
+        #deny all;
+    }
+}
+
+server {
+    listen 5000;
+
+    vhost_traffic_status off;
+
+    location / {
+        proxy_pass http://localhost:3031;
+    }
+}

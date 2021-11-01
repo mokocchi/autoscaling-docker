@@ -1,0 +1,10 @@
+SECRET_KEY = '1234'
+
+PROPAGATE_EXCEPTIONS = True
+
+# Database configuration
+SQLALCHEMY_DATABASE_URI = 'sqlite:///autoscaling.sqlite'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SHOW_SQLALCHEMY_LOG_MESSAGES = False
+
+ERROR_404_HELP = False
